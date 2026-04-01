@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/background"
+            app:titleTextColor="@color/text_primary"
+            app:subtitleTextColor="@color/text_secondary"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Peer transport status -->
+    <TextView
+        android:id="@+id/tv_peer_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:paddingStart="16dp"
+        android:text="Searching mesh..."
+        android:textSize="11sp"
+        android:fontFamily="monospace"
+        android:textColor="@color/accent_green"
+        android:background="@color/surface"/>
+
+    <!-- Message list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_messages"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:clipToPadding="false"/>
+
+    <!-- Queued notice -->
+    <TextView
+        android:id="@+id/tv_queued_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No route found — message queued for store &amp; forward delivery"
+        android:textSize="11sp"
+        android:textColor="@color/accent_amber"
+        android:padding="8dp"
+        android:paddingStart="16dp"
+        android:background="@color/surface"
+        android:visibility="gone"/>
+
+    <!-- Message input row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="@color/surface">
+
+        <EditText
+            android:id="@+id/et_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Type message..."
+            android:padding="10dp"
+            android:background="@drawable/bg_input"
+            android:textSize="14sp"
+            android:textColor="@color/text_primary"
+            android:inputType="textMultiLine"
+            android:maxLines="4"/>
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_button_primary"
+            android:textColor="@color/background"
+            android:padding="12dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

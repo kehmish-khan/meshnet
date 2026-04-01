@@ -1,0 +1,101 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.protobuf'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.meshnet'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.meshnet"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+// Protobuf / gRPC code generation
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.24.0"
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.58.0"
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java { option 'lite' }
+                kotlin { option 'lite' }
+            }
+            task.plugins {
+                grpc { option 'lite' }
+            }
+        }
+    }
+}
+
+dependencies {
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
+
+    // Android
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
+    implementation 'androidx.activity:activity-ktx:1.8.0'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+
+    // Room (local SQLite database)
+    implementation "androidx.room:room-runtime:2.6.0"
+    implementation "androidx.room:room-ktx:2.6.0"
+    kapt "androidx.room:room-compiler:2.6.0"
+
+    // gRPC
+    implementation "io.grpc:grpc-okhttp:1.58.0"
+    implementation "io.grpc:grpc-protobuf-lite:1.58.0"
+    implementation "io.grpc:grpc-stub:1.58.0"
+    implementation "io.grpc:grpc-kotlin-stub:1.4.0"
+    implementation "com.google.protobuf:protobuf-kotlin-lite:3.24.0"
+
+    // Cryptography (libsodium wrapper)
+    implementation 'com.goterl:lazysodium-android:5.1.0@aar'
+    implementation 'net.java.dev.jna:jna:5.13.0@aar'
+
+    // QR Code generation
+    implementation 'com.google.zxing:core:3.5.2'
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+
+    // JSON
+    implementation 'com.google.code.gson:gson:2.10.1'
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:background="?attr/selectableItemBackground">
+
+    <!-- Avatar circle -->
+    <TextView
+        android:id="@+id/tv_initials"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/bg_avatar"
+        android:layout_marginEnd="12dp"/>
+
+    <!-- Name + key preview -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_contact_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_contact_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:fontFamily="monospace"
+            android:textColor="@color/text_secondary"
+            android:layout_marginTop="2dp"/>
+
+    </LinearLayout>
+
+    <!-- Arrow -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="›"
+        android:textSize="20sp"
+        android:textColor="@color/text_secondary"
+        android:layout_gravity="center_vertical"/>
+
+</LinearLayout>

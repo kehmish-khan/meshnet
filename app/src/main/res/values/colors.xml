@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#FFFFFF</color>
+    <color name="surface">#F5F5F5</color>
+    <color name="text_primary">#111111</color>
+    <color name="text_secondary">#888888</color>
+    <color name="accent_green">#2E7D32</color>
+    <color name="accent_amber">#E65100</color>
+    <color name="bubble_sent">#1A1A1A</color>
+    <color name="bubble_received">#F0F0F0</color>
+    <color name="avatar_bg">#333333</color>
+</resources>

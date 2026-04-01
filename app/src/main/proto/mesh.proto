@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package com.meshnet;
+
+option java_package = "com.meshnet.grpc";
+option java_multiple_files = true;
+
+// ─────────────────────────────────────────
+//  Core message types
+// ─────────────────────────────────────────
+
+// A chat message travelling across the mesh
+message ChatMessage {
+    string message_id   = 1;  // unique UUID for deduplication
+    string from_key     = 2;  // sender's public key (hex)
+    string to_key       = 3;  // recipient's public key (hex)
+    bytes  ciphertext   = 4;  // AES-256 encrypted message content
+    bytes  nonce        = 5;  // encryption nonce
+    int64  timestamp    = 6;  // unix epoch ms
+    int32  ttl          = 7;  // hops remaining before message dies
+    string transport    = 8;  // "BT" or "WIFI" — for logging
+    bytes  signature    = 9;  // Ed25519 signature of message_id+ciphertext
+}
+
+// Acknowledgement returned after receiving a message
+message Ack {
+    string message_id = 1;
+    bool   delivered  = 2;
+    string relay_key  = 3;  // public key of the relaying node
+}
+
+// Peer discovery request — empty payload
+message DiscoverRequest {
+    string requester_key = 1;
+    string display_name  = 2;
+}
+
+// A single peer in the network
+message PeerInfo {
+    string public_key    = 1;
+    string display_name  = 2;
+    string transport     = 3;  // BT or WIFI
+    int32  signal_rssi   = 4;
+    int64  last_seen     = 5;
+}
+
+// List of discovered peers
+message PeerList {
+    repeated PeerInfo peers = 1;
+}
+
+// Contact exchange — share your identity
+message IdentityPayload {
+    string public_key    = 1;
+    string display_name  = 2;
+    string fingerprint   = 3;
+}
+
+// ─────────────────────────────────────────
+//  gRPC Service Definition
+// ─────────────────────────────────────────
+
+service MeshService {
+
+    // Send a new message into the mesh
+    rpc SendMessage(ChatMessage) returns (Ack);
+
+    // Forward a message this node received (relay hop)
+    rpc ForwardMessage(ChatMessage) returns (Ack);
+
+    // Discover nearby peers
+    rpc DiscoverPeers(DiscoverRequest) returns (PeerList);
+
+    // Exchange identity/public key with another device
+    rpc ExchangeIdentity(IdentityPayload) returns (IdentityPayload);
+}
