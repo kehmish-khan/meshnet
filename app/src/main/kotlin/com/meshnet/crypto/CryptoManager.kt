@@ -99,7 +99,7 @@ class CryptoManager(context: Context) {
      * @return EncryptedPayload containing ciphertext + nonce
      */
     fun encrypt(plaintext: String, recipientPublicKey: String): EncryptedPayload {
-        val nonce = sodium.nonce(Box.NONCEBYTES)
+       val nonce = sodium.nonce(Box.NONCEBYTES.toInt())
 
         val myPrivateKey = Key.fromHexString(prefs.getString(KEY_PRIVATE_BOX, "")!!)
         val theirPublicKey = Key.fromHexString(recipientPublicKey)
