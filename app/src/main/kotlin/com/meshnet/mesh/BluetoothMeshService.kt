@@ -116,7 +116,7 @@ class BluetoothMeshService : Service() {
             )
             Log.d(TAG, "RFCOMM server listening on $MESH_UUID")
 
-            while (isActive) {
+            while (true) {
                 val socket = withContext(Dispatchers.IO) {
                     serverSocket?.accept()   // blocks until a peer connects
                 } ?: break
