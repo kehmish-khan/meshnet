@@ -66,7 +66,7 @@ class WifiDirectService : Service() {
         super.onCreate()
         crypto = CryptoManager(applicationContext)
         db = MeshDatabase.getInstance(applicationContext)
-        router = MeshNetApp.router
+       router = (application as com.meshnet.MeshNetApp).router
 
         wifiP2pManager = getSystemService(Context.WIFI_P2P_SERVICE) as WifiP2pManager
         channel = wifiP2pManager.initialize(this, mainLooper, null)
