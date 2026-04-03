@@ -69,7 +69,7 @@ class BluetoothMeshService : Service() {
         super.onCreate()
         crypto = CryptoManager(applicationContext)
         db = MeshDatabase.getInstance(applicationContext)
-        router = MeshNetApp.router
+       router = (application as com.meshnet.MeshNetApp).router
 
         val btManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         bluetoothAdapter = btManager.adapter
