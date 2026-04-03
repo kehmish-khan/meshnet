@@ -309,7 +309,7 @@ class WifiDirectService : Service() {
         NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("MeshNet WiFi Active")
             .setContentText("WiFi Direct mesh running")
-            .setSmallIcon(android.R.drawable.stat_sys_data_wifi)
+           .setSmallIcon(android.R.drawable.ic_menu_share)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .build()
 }
